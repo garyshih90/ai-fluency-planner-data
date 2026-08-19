@@ -408,10 +408,19 @@ const DEFAULT_TILES = [
   { id: "t39", name: "Walmart", type: "Client Engagement & Eminence", format: "Eminence", frequency: "once", ascendCovered: false, description: "Client spotlight \u2014 AI-led pursuit and delivery story", owner: "", notes: "" }
 ];
 const STORAGE_KEY = "planner-state-v7";
+const PUBLISHED_STATE_URL = "board-state.json";
 async function loadState() {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (raw) return JSON.parse(raw);
+  } catch (_) {
+  }
+  try {
+    const res = await fetch(`${PUBLISHED_STATE_URL}?t=${Date.now()}`, { cache: "no-store" });
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.tiles) return data;
+    }
   } catch (_) {
   }
   return null;
@@ -423,6 +432,17 @@ async function saveState(state) {
   } catch (_) {
     return false;
   }
+}
+function publishState(state) {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "board-state.json";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 function getWeekDays(isoStart) {
   const [y, m, d] = isoStart.split("-").map(Number);
@@ -818,7 +838,15 @@ function ProgrammingPlanner() {
         input:focus,textarea:focus,select:focus{border-color:#3B82F6!important;outline:none;box-shadow:0 0 0 3px rgba(59,130,246,.12)}
         button:hover:not(:disabled){opacity:.82}
         .wrow:hover .wdel{opacity:1} .wdel{opacity:0;transition:opacity .15s}
-      `), /* @__PURE__ */ React.createElement("div", { style: { background: "#111827", padding: "14px 28px", display: "flex", alignItems: "center", justifyContent: "space-between" } }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 17, fontWeight: 800, color: "#fff", letterSpacing: "-.02em" } }, "\u{1F4C5} Seller AI Fluency \u2014 Programming Planner"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "#9CA3AF", marginTop: 2 } }, "Aug 17 \u2013 Nov 13, 2026 \xB7 Mon\u2013Fri + async \xB7 Shared board \xB7 All changes sync live")), /* @__PURE__ */ React.createElement(SaveIndicator, { status: saveStatus })), /* @__PURE__ */ React.createElement("div", { style: { maxWidth: 1500, margin: "0 auto", padding: "20px 20px 0" } }, /* @__PURE__ */ React.createElement(Legend, null), /* @__PURE__ */ React.createElement(
+      `), /* @__PURE__ */ React.createElement("div", { style: { background: "#111827", padding: "14px 28px", display: "flex", alignItems: "center", justifyContent: "space-between" } }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 17, fontWeight: 800, color: "#fff", letterSpacing: "-.02em" } }, "\u{1F4C5} Seller AI Fluency \u2014 Programming Planner"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "#9CA3AF", marginTop: 2 } }, "Aug 17 \u2013 Nov 13, 2026 \xB7 Mon\u2013Fri + async \xB7 Edits save to this browser only \u2014 click Publish to share with the team")), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 14 } }, /* @__PURE__ */ React.createElement(SaveIndicator, { status: saveStatus }), /* @__PURE__ */ React.createElement(
+    "button",
+    {
+      onClick: () => publishState({ tiles, daySlots, asyncSlots, weeks }),
+      title: "Download board-state.json, then upload it to the GitHub repo to publish for your team",
+      style: { background: "#2563EB", color: "#fff", border: "none", borderRadius: 8, padding: "8px 16px", fontSize: 12, fontWeight: 700, cursor: "pointer" }
+    },
+    "\u2B06 Publish"
+  ))), /* @__PURE__ */ React.createElement("div", { style: { maxWidth: 1500, margin: "0 auto", padding: "20px 20px 0" } }, /* @__PURE__ */ React.createElement(Legend, null), /* @__PURE__ */ React.createElement(
     "div",
     {
       onDragOver: (e) => {

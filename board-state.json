@@ -1,0 +1,491 @@
+{
+  "tiles": [
+    {
+      "id": "t1",
+      "name": "Kickoff + Anatomy of an AI-Led Pursuit",
+      "type": "AI-Led Selling & Origination",
+      "format": "Virtual meeting",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Recap FY26, pivot to FY27 plan, quick hit format spotlight",
+      "owner": "Simon / Customer AI GTM",
+      "notes": ""
+    },
+    {
+      "id": "t6",
+      "name": "Peer-to-Peer / Open Forum",
+      "type": "AI-Led Selling & Origination",
+      "format": "Podcast/Interview",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Seller-to-seller conversation on what's working in AI pursuits",
+      "owner": "Jenny Kelly / Yash Agarwal",
+      "notes": ""
+    },
+    {
+      "id": "t9",
+      "name": "AI Origination Story",
+      "type": "AI-Led Selling & Origination",
+      "format": "Eminence",
+      "frequency": "once",
+      "ascendCovered": true,
+      "description": "How top sellers originate AI-led deals before an RFP exists",
+      "owner": "TBD",
+      "notes": ""
+    },
+    {
+      "id": "t13",
+      "name": "Seller-to-Seller Enablement",
+      "type": "AI-Led Selling & Origination",
+      "format": "Podcast/Interview",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "PMDs share how they used AI to shape or close a recent deal",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t7",
+      "name": "Live AI Selling Session - Pursuit Review",
+      "type": "AI-Led Selling & Origination",
+      "format": "Workshop",
+      "frequency": "once",
+      "ascendCovered": true,
+      "description": "Real pursuit walkthrough - how AI shaped the approach and close",
+      "owner": "Tom McAleer",
+      "notes": ""
+    },
+    {
+      "id": "t14",
+      "name": "Best Practices: AI RFP Response",
+      "type": "AI-Led Selling & Origination",
+      "format": "Eminence",
+      "frequency": "once",
+      "ascendCovered": true,
+      "description": "How to use AI to draft, pressure-test, and iterate RFP responses",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t15",
+      "name": "Selling Differently with AI",
+      "type": "AI-Led Selling & Origination",
+      "format": "Virtual meeting",
+      "frequency": "once",
+      "ascendCovered": true,
+      "description": "Mindset and behavioral shift for AI-native selling",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t16",
+      "name": "Seller-to-Seller Forum",
+      "type": "AI-Led Selling & Origination",
+      "format": "Podcast/Interview",
+      "frequency": "once",
+      "ascendCovered": true,
+      "description": "Peer exchange on what's working in AI-led pursuits",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t5",
+      "name": "AI Tools Landscape",
+      "type": "AI Tools & Technical Fluency",
+      "format": "Eminence",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Quick resource guide on key AI tools across the practice",
+      "owner": "N/A",
+      "notes": ""
+    },
+    {
+      "id": "t17",
+      "name": "AgencyOS",
+      "type": "AI Tools & Technical Fluency",
+      "format": "Virtual meeting",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Overview and enablement for AgencyOS AI platform",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t18",
+      "name": "AI Navigator",
+      "type": "AI Tools & Technical Fluency",
+      "format": "Virtual meeting",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "How to use AI Navigator for seller enablement",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t19",
+      "name": "Ascend Seller Journey (Tool)",
+      "type": "AI Tools & Technical Fluency",
+      "format": "Workshop",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Hands-on walkthrough of Ascend platform features",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t20",
+      "name": "ConvergeConsumer",
+      "type": "AI Tools & Technical Fluency",
+      "format": "Virtual meeting",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Platform overview and use cases for ConvergeConsumer",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t21",
+      "name": "CustomerOS",
+      "type": "AI Tools & Technical Fluency",
+      "format": "Video clip",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "CustomerOS capabilities and seller use cases",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t22",
+      "name": "GIA",
+      "type": "AI Tools & Technical Fluency",
+      "format": "Virtual meeting",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Generative Intelligence Accelerator overview and enablement",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t23",
+      "name": "IRIS",
+      "type": "AI Tools & Technical Fluency",
+      "format": "Virtual meeting",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "IRIS platform overview and seller use cases",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t24",
+      "name": "Project Brain",
+      "type": "AI Tools & Technical Fluency",
+      "format": "Eminence",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Shared AI knowledge layer for engagements — setup and governance",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t25",
+      "name": "ZORA AI",
+      "type": "AI Tools & Technical Fluency",
+      "format": "Virtual meeting",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "ZORA AI platform overview and use cases",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t3",
+      "name": "Hyperscaler Overview (AWS, MSFT, Google)",
+      "type": "Ecosystem & Partners",
+      "format": "Virtual meeting",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Live virtual overview of hyperscaler AI offerings and GTM",
+      "owner": "Various Hyperscaler Reps",
+      "notes": ""
+    },
+    {
+      "id": "t12",
+      "name": "Anthropic Hyperscaler Overview",
+      "type": "Ecosystem & Partners",
+      "format": "Virtual meeting",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Deep dive on Anthropic GTM, Claude capabilities, and partnership model",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t26",
+      "name": "Adobe GTM Activation",
+      "type": "Ecosystem & Partners",
+      "format": "Virtual meeting",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Adobe AI partnership GTM motion and seller activation",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t27",
+      "name": "Anthropic GTM Activation",
+      "type": "Ecosystem & Partners",
+      "format": "Virtual meeting",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Anthropic GTM motion, Claude positioning, and co-sell approach",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t28",
+      "name": "Hyperscaler Deepdive – AWS",
+      "type": "Ecosystem & Partners",
+      "format": "Virtual meeting",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Deep dive on AWS AI offerings, GTM, and Deloitte partnership",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t29",
+      "name": "Hyperscaler Deepdive – Google",
+      "type": "Ecosystem & Partners",
+      "format": "Virtual meeting",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Deep dive on Google AI offerings, GTM, and Deloitte partnership",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t30",
+      "name": "Hyperscaler Deepdive – Microsoft",
+      "type": "Ecosystem & Partners",
+      "format": "Virtual meeting",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Deep dive on Microsoft AI offerings, GTM, and Deloitte partnership",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t31",
+      "name": "Oracle GTM Activation",
+      "type": "Ecosystem & Partners",
+      "format": "Virtual meeting",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Oracle AI partnership GTM motion and seller activation",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t32",
+      "name": "Salesforce GTM Activation",
+      "type": "Ecosystem & Partners",
+      "format": "Virtual meeting",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Salesforce AI partnership GTM motion and seller activation",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t4",
+      "name": "Client Readiness Assessment",
+      "type": "Commercial Value Framing",
+      "format": "Virtual meeting",
+      "frequency": "once",
+      "ascendCovered": true,
+      "description": "Framework for assessing client AI adoption maturity",
+      "owner": "TBD",
+      "notes": ""
+    },
+    {
+      "id": "t8",
+      "name": "ROI Framing + Pricing Model Best Practices",
+      "type": "Commercial Value Framing",
+      "format": "Video clip",
+      "frequency": "once",
+      "ascendCovered": true,
+      "description": "How to quantify AI value and build it into the commercial model",
+      "owner": "TBD",
+      "notes": ""
+    },
+    {
+      "id": "t2",
+      "name": "Anatomy of an AI-Led Pursuit",
+      "type": "Client Engagement & Eminence",
+      "format": "Eminence",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Written content and interactive HTML on how AI changes the pursuit",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t11",
+      "name": "Executive Narrative",
+      "type": "Client Engagement & Eminence",
+      "format": "Podcast/Interview",
+      "frequency": "once",
+      "ascendCovered": true,
+      "description": "How to build and deliver an AI value narrative for the C-suite",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t33",
+      "name": "CVS",
+      "type": "Client Engagement & Eminence",
+      "format": "Eminence",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Client spotlight — AI-led pursuit and delivery story",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t34",
+      "name": "Dell",
+      "type": "Client Engagement & Eminence",
+      "format": "Eminence",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Client spotlight — AI-led pursuit and delivery story",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t35",
+      "name": "Google",
+      "type": "Client Engagement & Eminence",
+      "format": "Eminence",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Client spotlight — AI-led pursuit and delivery story",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t36",
+      "name": "Micron",
+      "type": "Client Engagement & Eminence",
+      "format": "Eminence",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Client spotlight — AI-led pursuit and delivery story",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t37",
+      "name": "Patterson (Dental)",
+      "type": "Client Engagement & Eminence",
+      "format": "Eminence",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Client spotlight — AI-led pursuit and delivery story",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t38",
+      "name": "Takeda",
+      "type": "Client Engagement & Eminence",
+      "format": "Eminence",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Client spotlight — AI-led pursuit and delivery story",
+      "owner": "",
+      "notes": ""
+    },
+    {
+      "id": "t39",
+      "name": "Walmart",
+      "type": "Client Engagement & Eminence",
+      "format": "Eminence",
+      "frequency": "once",
+      "ascendCovered": false,
+      "description": "Client spotlight — AI-led pursuit and delivery story",
+      "owner": "",
+      "notes": ""
+    }
+  ],
+  "daySlots": {},
+  "asyncSlots": {},
+  "weeks": [
+    {
+      "id": "w1",
+      "isoStart": "2026-08-17",
+      "note": ""
+    },
+    {
+      "id": "w2",
+      "isoStart": "2026-08-24",
+      "note": ""
+    },
+    {
+      "id": "w3",
+      "isoStart": "2026-08-31",
+      "note": ""
+    },
+    {
+      "id": "w4",
+      "isoStart": "2026-09-07",
+      "note": "Labor Day (Sep 7)"
+    },
+    {
+      "id": "w5",
+      "isoStart": "2026-09-14",
+      "note": ""
+    },
+    {
+      "id": "w6",
+      "isoStart": "2026-09-21",
+      "note": ""
+    },
+    {
+      "id": "w7",
+      "isoStart": "2026-09-28",
+      "note": ""
+    },
+    {
+      "id": "w8",
+      "isoStart": "2026-10-05",
+      "note": ""
+    },
+    {
+      "id": "w9",
+      "isoStart": "2026-10-12",
+      "note": "Columbus Day (Oct 13)"
+    },
+    {
+      "id": "w10",
+      "isoStart": "2026-10-19",
+      "note": ""
+    },
+    {
+      "id": "w11",
+      "isoStart": "2026-10-26",
+      "note": ""
+    },
+    {
+      "id": "w12",
+      "isoStart": "2026-11-02",
+      "note": ""
+    },
+    {
+      "id": "w13",
+      "isoStart": "2026-11-09",
+      "note": ""
+    }
+  ]
+}
