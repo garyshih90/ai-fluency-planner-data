@@ -166,17 +166,6 @@
       "notes": ""
     },
     {
-      "id": "t3",
-      "name": "Hyperscaler Overview (AWS, MSFT, Google)",
-      "type": "Ecosystem & Partners",
-      "format": "Virtual meeting",
-      "frequency": "once",
-      "ascendCovered": false,
-      "description": "Live virtual overview of hyperscaler AI offerings and GTM",
-      "owner": "Various Hyperscaler Reps",
-      "notes": ""
-    },
-    {
       "id": "t12",
       "name": "Anthropic Hyperscaler Overview",
       "type": "Ecosystem & Partners",
@@ -453,6 +442,54 @@
       "id": "w13",
       "isoStart": "2026-11-09",
       "note": ""
+    }
+  ],
+  "series": [
+    {
+      "id": "s1",
+      "name": "Hyperscaler Spotlight Series",
+      "cadence": "Weekly",
+      "description": "One provider per week — announce as a 4-part series, not four separate invites. Simon to sponsor kickoff.",
+      "tileIds": [
+        "t12",
+        "t28",
+        "t29",
+        "t30"
+      ]
+    },
+    {
+      "id": "s2",
+      "name": "Tool Spotlight",
+      "cadence": "Biweekly",
+      "description": "Highest-signal tools by adoption — short, practical, actionable, multi-format.",
+      "tileIds": [
+        "t23",
+        "t21"
+      ]
+    },
+    {
+      "id": "s3",
+      "name": "Tom's Live Selling Session",
+      "cadence": "Monthly",
+      "description": "High visibility — shows AI in action on a real pursuit.",
+      "tileIds": [
+        "t7"
+      ]
+    },
+    {
+      "id": "s4",
+      "name": "Best-in-Class",
+      "cadence": "Async",
+      "description": "Client spotlights and eminence — leverage existing townhalls, newsletters, all-hands.",
+      "tileIds": [
+        "t33",
+        "t34",
+        "t35",
+        "t36",
+        "t37",
+        "t38",
+        "t39"
+      ]
     }
   ]
 }

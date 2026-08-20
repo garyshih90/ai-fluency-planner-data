@@ -384,7 +384,6 @@ const DEFAULT_TILES = [
   { id: "t24", name: "Project Brain", type: "AI Tools & Technical Fluency", format: "Eminence", frequency: "once", ascendCovered: false, description: "Shared AI knowledge layer for engagements \u2014 setup and governance", owner: "", notes: "" },
   { id: "t25", name: "ZORA AI", type: "AI Tools & Technical Fluency", format: "Virtual meeting", frequency: "once", ascendCovered: false, description: "ZORA AI platform overview and use cases", owner: "", notes: "" },
   // ── Ecosystem & Partners ─────────────────────────────────────────────────
-  { id: "t3", name: "Hyperscaler Overview (AWS, MSFT, Google)", type: "Ecosystem & Partners", format: "Virtual meeting", frequency: "once", ascendCovered: false, description: "Live virtual overview of hyperscaler AI offerings and GTM", owner: "Various Hyperscaler Reps", notes: "" },
   { id: "t12", name: "Anthropic Hyperscaler Overview", type: "Ecosystem & Partners", format: "Virtual meeting", frequency: "once", ascendCovered: false, description: "Deep dive on Anthropic GTM, Claude capabilities, and partnership model", owner: "", notes: "" },
   { id: "t26", name: "Adobe GTM Activation", type: "Ecosystem & Partners", format: "Virtual meeting", frequency: "once", ascendCovered: false, description: "Adobe AI partnership GTM motion and seller activation", owner: "", notes: "" },
   { id: "t27", name: "Anthropic GTM Activation", type: "Ecosystem & Partners", format: "Virtual meeting", frequency: "once", ascendCovered: false, description: "Anthropic GTM motion, Claude positioning, and co-sell approach", owner: "", notes: "" },
@@ -406,6 +405,37 @@ const DEFAULT_TILES = [
   { id: "t37", name: "Patterson (Dental)", type: "Client Engagement & Eminence", format: "Eminence", frequency: "once", ascendCovered: false, description: "Client spotlight \u2014 AI-led pursuit and delivery story", owner: "", notes: "" },
   { id: "t38", name: "Takeda", type: "Client Engagement & Eminence", format: "Eminence", frequency: "once", ascendCovered: false, description: "Client spotlight \u2014 AI-led pursuit and delivery story", owner: "", notes: "" },
   { id: "t39", name: "Walmart", type: "Client Engagement & Eminence", format: "Eminence", frequency: "once", ascendCovered: false, description: "Client spotlight \u2014 AI-led pursuit and delivery story", owner: "", notes: "" }
+];
+const SERIES_CADENCES = ["Weekly", "Biweekly", "Monthly", "Async"];
+const DEFAULT_SERIES = [
+  {
+    id: "s1",
+    name: "Hyperscaler Spotlight Series",
+    cadence: "Weekly",
+    description: "One provider per week \u2014 announce as a 4-part series, not four separate invites. Simon to sponsor kickoff.",
+    tileIds: ["t12", "t28", "t29", "t30"]
+  },
+  {
+    id: "s2",
+    name: "Tool Spotlight",
+    cadence: "Biweekly",
+    description: "Highest-signal tools by adoption \u2014 short, practical, actionable, multi-format.",
+    tileIds: ["t23", "t21"]
+  },
+  {
+    id: "s3",
+    name: "Tom's Live Selling Session",
+    cadence: "Monthly",
+    description: "High visibility \u2014 shows AI in action on a real pursuit.",
+    tileIds: ["t7"]
+  },
+  {
+    id: "s4",
+    name: "Best-in-Class",
+    cadence: "Async",
+    description: "Client spotlights and eminence \u2014 leverage existing townhalls, newsletters, all-hands.",
+    tileIds: ["t33", "t34", "t35", "t36", "t37", "t38", "t39"]
+  }
 ];
 const STORAGE_KEY = "planner-state-v7";
 const PUBLISHED_STATE_URL = "board-state.json";
@@ -613,6 +643,86 @@ function AsyncTile({ tile, onEdit, onRemove, isDragging, onDragStart, onDragEnd 
     /* @__PURE__ */ React.createElement("div", { onClick: () => onEdit(tile), style: { cursor: "pointer", paddingRight: 14 } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 6 } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: 14, flexShrink: 0 } }, f.icon), /* @__PURE__ */ React.createElement("div", { style: { minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { style: { fontWeight: 700, fontSize: 11, color: "#111827", lineHeight: 1.3 } }, tile.name, /* @__PURE__ */ React.createElement(FreqBadge, { frequency: tile.frequency })), /* @__PURE__ */ React.createElement("span", { style: { display: "inline-block", background: t.color, color: "#fff", borderRadius: 3, fontSize: 9, fontWeight: 600, padding: "1px 5px", marginTop: 2 } }, tile.type))))
   );
 }
+function SeriesTileRow({ tile, seriesId, index, isDragging, isOver, onDragStart, onDragEnd, onDragOverRow, onDropRow, onRemove, onEdit }) {
+  const f = FORMAT_CONFIG[tile.format] || FORMAT_CONFIG["Eminence"];
+  const t = TYPE_CONFIG[tile.type] || { color: "#374151", bg: "#F3F4F6", border: "#E5E7EB" };
+  return /* @__PURE__ */ React.createElement(
+    "div",
+    {
+      draggable: true,
+      onDragStart: (e) => {
+        e.stopPropagation();
+        e.dataTransfer.setData("tileId", tile.id);
+        onDragStart(tile.id, seriesId);
+      },
+      onDragEnd,
+      onDragOver: (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onDragOverRow(seriesId, index);
+      },
+      onDrop: (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onDropRow(seriesId, index);
+      },
+      style: { background: t.bg, border: `1.5px solid ${isOver ? "#3B82F6" : t.border}`, borderRadius: 8, padding: "6px 8px", opacity: isDragging ? 0.4 : 1, userSelect: "none", position: "relative", transition: "box-shadow .15s,border-color .15s" },
+      onMouseEnter: (e) => e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,.06)",
+      onMouseLeave: (e) => e.currentTarget.style.boxShadow = "none"
+    },
+    /* @__PURE__ */ React.createElement("button", { onClick: (e) => {
+      e.stopPropagation();
+      onRemove();
+    }, title: "Remove from series", style: { position: "absolute", top: 4, right: 4, width: 16, height: 16, borderRadius: 3, background: "rgba(0,0,0,.1)", border: "none", fontSize: 10, cursor: "pointer", color: "#6B7280", display: "flex", alignItems: "center", justifyContent: "center" } }, "\xD7"),
+    /* @__PURE__ */ React.createElement("div", { onClick: () => onEdit(tile), style: { cursor: "pointer", paddingRight: 14, display: "flex", alignItems: "center", gap: 6 } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: 13, flexShrink: 0 } }, f.icon), /* @__PURE__ */ React.createElement("div", { style: { minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { style: { fontWeight: 600, fontSize: 11, color: "#111827", lineHeight: 1.3 } }, tile.name, /* @__PURE__ */ React.createElement(FreqBadge, { frequency: tile.frequency })), /* @__PURE__ */ React.createElement("span", { style: { display: "inline-block", background: t.color, color: "#fff", borderRadius: 3, fontSize: 9, fontWeight: 600, padding: "1px 5px", marginTop: 2 } }, tile.type)))
+  );
+}
+function SeriesCard({ series, tiles, dragOverSlot, onDragStart, onDragEnd, onDragOverRow, onDropRow, onDragOverEnd, onDropEnd, onRemoveTile, onEditTile, onDelete, draggingId }) {
+  const isEndOver = dragOverSlot && dragOverSlot.seriesId === series.id && dragOverSlot.end;
+  return /* @__PURE__ */ React.createElement("div", { className: "wrow", style: { background: "#fff", border: "1.5px solid #E5E7EB", borderRadius: 10, padding: 12, minWidth: 220, flex: "1 1 240px" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 4 } }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 6 } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: 12, fontWeight: 700, color: "#111827" } }, series.name), /* @__PURE__ */ React.createElement("span", { style: { fontSize: 9, fontWeight: 700, color: "#374151", background: "#F3F4F6", borderRadius: 20, padding: "1px 7px" } }, series.cadence)), series.description && /* @__PURE__ */ React.createElement("div", { style: { fontSize: 10.5, color: "#6B7280", marginTop: 3, lineHeight: 1.4 } }, series.description)), /* @__PURE__ */ React.createElement("button", { className: "wdel", onClick: onDelete, title: "Delete series", style: { width: 18, height: 18, borderRadius: 4, background: "#FEE2E2", border: "none", color: "#EF4444", fontSize: 11, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } }, "\xD7")), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 4, marginTop: 8 } }, tiles.map((tile, i) => /* @__PURE__ */ React.createElement(
+    SeriesTileRow,
+    {
+      key: tile.id,
+      tile,
+      seriesId: series.id,
+      index: i,
+      isDragging: draggingId === tile.id,
+      isOver: dragOverSlot && dragOverSlot.seriesId === series.id && dragOverSlot.index === i,
+      onDragStart,
+      onDragEnd,
+      onDragOverRow,
+      onDropRow,
+      onRemove: () => onRemoveTile(series.id, tile.id),
+      onEdit: onEditTile
+    }
+  )), /* @__PURE__ */ React.createElement(
+    "div",
+    {
+      onDragOver: (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onDragOverEnd(series.id);
+      },
+      onDrop: (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onDropEnd(series.id);
+      },
+      style: { minHeight: tiles.length > 0 ? 24 : 40, border: `1.5px dashed ${isEndOver ? "#3B82F6" : "#E5E7EB"}`, borderRadius: 7, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10.5, color: isEndOver ? "#3B82F6" : "#9CA3AF", transition: "all .15s" }
+    },
+    isEndOver ? "+ drop here" : tiles.length === 0 ? "drag tiles here" : "+ add more"
+  )));
+}
+function AddSeriesModal({ onAdd, onClose }) {
+  const [name, setName] = useState("");
+  const [cadence, setCadence] = useState(SERIES_CADENCES[0]);
+  const [description, setDescription] = useState("");
+  return /* @__PURE__ */ React.createElement("div", { onClick: (e) => {
+    if (e.target === e.currentTarget) onClose();
+  }, style: { position: "fixed", inset: 0, background: "rgba(0,0,0,.45)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1e3 } }, /* @__PURE__ */ React.createElement("div", { style: { background: "#fff", borderRadius: 14, padding: 26, width: 420, boxShadow: "0 20px 60px rgba(0,0,0,.18)" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18 } }, /* @__PURE__ */ React.createElement("h3", { style: { margin: 0, fontSize: 16, fontWeight: 700 } }, "Add series"), /* @__PURE__ */ React.createElement("button", { onClick: onClose, style: { background: "none", border: "none", fontSize: 20, cursor: "pointer", color: "#6B7280" } }, "\xD7")), /* @__PURE__ */ React.createElement("label", { style: { display: "block", marginBottom: 12 } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: 11, fontWeight: 600, color: "#6B7280", display: "block", marginBottom: 3, textTransform: "uppercase", letterSpacing: "0.05em" } }, "Name"), /* @__PURE__ */ React.createElement("input", { value: name, onChange: (e) => setName(e.target.value), placeholder: "e.g. Hyperscaler Spotlight Series", style: inputStyle })), /* @__PURE__ */ React.createElement("label", { style: { display: "block", marginBottom: 12 } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: 11, fontWeight: 600, color: "#6B7280", display: "block", marginBottom: 3, textTransform: "uppercase", letterSpacing: "0.05em" } }, "Cadence"), /* @__PURE__ */ React.createElement("select", { value: cadence, onChange: (e) => setCadence(e.target.value), style: inputStyle }, SERIES_CADENCES.map((c) => /* @__PURE__ */ React.createElement("option", { key: c, value: c }, c)))), /* @__PURE__ */ React.createElement("label", { style: { display: "block", marginBottom: 18 } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: 11, fontWeight: 600, color: "#6B7280", display: "block", marginBottom: 3, textTransform: "uppercase", letterSpacing: "0.05em" } }, "Description (optional)"), /* @__PURE__ */ React.createElement("textarea", { value: description, onChange: (e) => setDescription(e.target.value), rows: 3, style: { ...inputStyle, resize: "none" } })), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 10 } }, /* @__PURE__ */ React.createElement("button", { onClick: () => {
+    if (name.trim()) onAdd({ name: name.trim(), cadence, description: description.trim() });
+  }, disabled: !name.trim(), style: { flex: 1, background: name.trim() ? "#111827" : "#E5E7EB", color: name.trim() ? "#fff" : "#9CA3AF", border: "none", borderRadius: 8, padding: "10px 0", fontSize: 13, fontWeight: 600, cursor: name.trim() ? "pointer" : "default" } }, "Add series"), /* @__PURE__ */ React.createElement("button", { onClick: onClose, style: { flex: 1, background: "#F3F4F6", color: "#374151", border: "none", borderRadius: 8, padding: "10px 0", fontSize: 13, fontWeight: 600, cursor: "pointer" } }, "Cancel"))));
+}
 function EditModal({ tile, onSave, onDelete, onClose }) {
   const [form, setForm] = useState({ frequency: "once", ascendCovered: false, ...tile });
   const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
@@ -637,14 +747,18 @@ function ProgrammingPlanner() {
   const [daySlots, setDaySlots] = useState({});
   const [asyncSlots, setAsyncSlots] = useState({});
   const [weeks, setWeeks] = useState(DEFAULT_WEEKS);
+  const [series, setSeries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [saveStatus, setSaveStatus] = useState("");
   const [draggingId, setDraggingId] = useState(null);
+  const [draggingFromSeriesId, setDraggingFromSeriesId] = useState(null);
   const [editingTile, setEditingTile] = useState(null);
   const [dragOverDay, setDragOverDay] = useState(null);
   const [dragOverAsync, setDragOverAsync] = useState(null);
   const [dragOverBank, setDragOverBank] = useState(false);
+  const [dragOverSeriesSlot, setDragOverSeriesSlot] = useState(null);
   const [showAddWeek, setShowAddWeek] = useState(false);
+  const [showAddSeries, setShowAddSeries] = useState(false);
   const [expandedIds, setExpandedIds] = useState(/* @__PURE__ */ new Set());
   const [form, setForm] = useState({ name: "", type: "", format: "Virtual meeting", frequency: "once", description: "", owner: "", notes: "" });
   const saveTimer = useRef(null);
@@ -656,33 +770,37 @@ function ProgrammingPlanner() {
         setDaySlots(saved.daySlots || {});
         setAsyncSlots(saved.asyncSlots || {});
         setWeeks(sortWeeks(saved.weeks || DEFAULT_WEEKS));
+        setSeries(saved.series || []);
       } else {
         setTiles(DEFAULT_TILES);
         setDaySlots({});
         setAsyncSlots({});
         setWeeks(DEFAULT_WEEKS);
+        setSeries(DEFAULT_SERIES);
       }
       setLoading(false);
     })();
   }, []);
-  const persist = useCallback((t, ds, as, ws) => {
+  const persist = useCallback((t, ds, as, ws, se) => {
     clearTimeout(saveTimer.current);
     setSaveStatus("saving");
     saveTimer.current = setTimeout(async () => {
-      const ok = await saveState({ tiles: t, daySlots: ds, asyncSlots: as, weeks: ws });
+      const ok = await saveState({ tiles: t, daySlots: ds, asyncSlots: as, weeks: ws, series: se });
       setSaveStatus(ok ? "saved" : "error");
       setTimeout(() => setSaveStatus(""), 2500);
     }, 400);
   }, []);
-  function update(nt, nds, nas, nws) {
+  function update(nt, nds, nas, nws, nse) {
     setTiles(nt);
     setDaySlots(nds);
     setAsyncSlots(nas);
     setWeeks(nws);
-    persist(nt, nds, nas, nws);
+    setSeries(nse);
+    persist(nt, nds, nas, nws, nse);
   }
   const scheduledIds = /* @__PURE__ */ new Set([...Object.values(daySlots).filter(Boolean), ...Object.values(asyncSlots).flat()]);
-  const bankTiles = tiles.filter((t) => !scheduledIds.has(t.id));
+  const tilesInSeries = new Set(series.flatMap((s) => s.tileIds));
+  const bankTiles = tiles.filter((t) => !scheduledIds.has(t.id) && !tilesInSeries.has(t.id));
   const sortedBank = [...bankTiles].sort((a, b) => {
     const ai = TYPES.indexOf(a.type), bi = TYPES.indexOf(b.type);
     if (ai !== bi) return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
@@ -701,16 +819,19 @@ function ProgrammingPlanner() {
   }
   function toggleAscendCovered(tileId, val) {
     const nextTiles = tiles.map((t) => t.id === tileId ? { ...t, ascendCovered: val } : t);
-    update(nextTiles, daySlots, asyncSlots, weeks);
+    update(nextTiles, daySlots, asyncSlots, weeks, series);
   }
-  function handleDragStart(id) {
+  function handleDragStart(id, fromSeriesId) {
     setDraggingId(id);
+    setDraggingFromSeriesId(fromSeriesId || null);
   }
   function handleDragEnd() {
     setDraggingId(null);
+    setDraggingFromSeriesId(null);
     setDragOverDay(null);
     setDragOverAsync(null);
     setDragOverBank(false);
+    setDragOverSeriesSlot(null);
   }
   function handleDropOnDay(weekId, dayIdx) {
     if (!draggingId) return;
@@ -732,7 +853,7 @@ function ProgrammingPlanner() {
     keys.forEach((k) => {
       if (!nds[k]) nds[k] = draggingId;
     });
-    update(tiles, nds, nas, weeks);
+    update(tiles, nds, nas, weeks, series);
     setDragOverDay(null);
     setDraggingId(null);
   }
@@ -755,7 +876,7 @@ function ProgrammingPlanner() {
       if (k !== weekId) nas[k] = nas[k].filter((id) => id !== draggingId);
     });
     nas[weekId].push(draggingId);
-    update(tiles, nds, nas, weeks);
+    update(tiles, nds, nas, weeks, series);
     setDragOverAsync(null);
     setDraggingId(null);
   }
@@ -771,19 +892,45 @@ function ProgrammingPlanner() {
     Object.keys(nas).forEach((k) => {
       nas[k] = nas[k].filter((id) => id !== draggingId);
     });
-    update(tiles, nds, nas, weeks);
+    const nse = draggingFromSeriesId ? series.map((s) => ({ ...s, tileIds: s.tileIds.filter((id) => id !== draggingId) })) : series;
+    update(tiles, nds, nas, weeks, nse);
     setDragOverBank(false);
     setDraggingId(null);
   }
   function removeFromAsync(weekId, tileId) {
     const nas = { ...asyncSlots };
     nas[weekId] = (nas[weekId] || []).filter((id) => id !== tileId);
-    update(tiles, daySlots, nas, weeks);
+    update(tiles, daySlots, nas, weeks, series);
   }
   function addTile() {
     if (!form.name.trim()) return;
-    update([...tiles, { ...form, id: `t${Date.now()}` }], daySlots, asyncSlots, weeks);
+    update([...tiles, { ...form, id: `t${Date.now()}` }], daySlots, asyncSlots, weeks, series);
     setForm({ name: "", type: "", format: "Virtual meeting", frequency: "once", description: "", owner: "", notes: "" });
+  }
+  function handleDropOnSeriesSlot(targetSeriesId, targetIndex) {
+    if (!draggingId) return;
+    let nse = series.map((s) => ({ ...s, tileIds: s.tileIds.filter((id) => id !== draggingId) }));
+    nse = nse.map((s) => {
+      if (s.id !== targetSeriesId) return s;
+      const ids = [...s.tileIds];
+      const insertAt = targetIndex == null ? ids.length : Math.min(targetIndex, ids.length);
+      ids.splice(insertAt, 0, draggingId);
+      return { ...s, tileIds: ids };
+    });
+    update(tiles, daySlots, asyncSlots, weeks, nse);
+    setDragOverSeriesSlot(null);
+    setDraggingId(null);
+    setDraggingFromSeriesId(null);
+  }
+  function removeTileFromSeries(seriesId, tileId) {
+    update(tiles, daySlots, asyncSlots, weeks, series.map((s) => s.id === seriesId ? { ...s, tileIds: s.tileIds.filter((id) => id !== tileId) } : s));
+  }
+  function addSeries(data) {
+    update(tiles, daySlots, asyncSlots, weeks, [...series, { ...data, id: `s${Date.now()}`, tileIds: [] }]);
+    setShowAddSeries(false);
+  }
+  function deleteSeries(seriesId) {
+    update(tiles, daySlots, asyncSlots, weeks, series.filter((s) => s.id !== seriesId));
   }
   function saveTile(u) {
     const old = tiles.find((t) => t.id === u.id);
@@ -801,7 +948,7 @@ function ProgrammingPlanner() {
         nas[k] = nas[k].filter((id) => id !== u.id);
       });
     }
-    update(tiles.map((t) => t.id === u.id ? u : t), nds, nas, weeks);
+    update(tiles.map((t) => t.id === u.id ? u : t), nds, nas, weeks, series);
     setEditingTile(null);
   }
   function deleteTile(id) {
@@ -813,11 +960,12 @@ function ProgrammingPlanner() {
     Object.keys(nas).forEach((k) => {
       nas[k] = (nas[k] || []).filter((x) => x !== id);
     });
-    update(tiles.filter((t) => t.id !== id), nds, nas, weeks);
+    const nse = series.map((s) => ({ ...s, tileIds: s.tileIds.filter((x) => x !== id) }));
+    update(tiles.filter((t) => t.id !== id), nds, nas, weeks, nse);
     setEditingTile(null);
   }
   function addWeek(data) {
-    update(tiles, daySlots, asyncSlots, sortWeeks([...weeks, { ...data, id: `w${Date.now()}` }]));
+    update(tiles, daySlots, asyncSlots, sortWeeks([...weeks, { ...data, id: `w${Date.now()}` }]), series);
     setShowAddWeek(false);
   }
   function deleteWeek(weekId) {
@@ -827,7 +975,7 @@ function ProgrammingPlanner() {
     });
     const nas = { ...asyncSlots };
     delete nas[weekId];
-    update(tiles, nds, nas, weeks.filter((w) => w.id !== weekId));
+    update(tiles, nds, nas, weeks.filter((w) => w.id !== weekId), series);
   }
   const totalLive = Object.values(daySlots).filter(Boolean).length;
   const totalAsync = Object.values(asyncSlots).flat().length;
@@ -841,7 +989,7 @@ function ProgrammingPlanner() {
       `), /* @__PURE__ */ React.createElement("div", { style: { background: "#111827", padding: "14px 28px", display: "flex", alignItems: "center", justifyContent: "space-between" } }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 17, fontWeight: 800, color: "#fff", letterSpacing: "-.02em" } }, "\u{1F4C5} Seller AI Fluency \u2014 Programming Planner"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "#9CA3AF", marginTop: 2 } }, "Aug 17 \u2013 Nov 13, 2026 \xB7 Mon\u2013Fri + async \xB7 Edits save to this browser only \u2014 click Publish to share with the team")), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 14 } }, /* @__PURE__ */ React.createElement(SaveIndicator, { status: saveStatus }), /* @__PURE__ */ React.createElement(
     "button",
     {
-      onClick: () => publishState({ tiles, daySlots, asyncSlots, weeks }),
+      onClick: () => publishState({ tiles, daySlots, asyncSlots, weeks, series }),
       title: "Download board-state.json, then upload it to the GitHub repo to publish for your team",
       style: { background: "#2563EB", color: "#fff", border: "none", borderRadius: 8, padding: "8px 16px", fontSize: 12, fontWeight: 700, cursor: "pointer" }
     },
@@ -858,6 +1006,28 @@ function ProgrammingPlanner() {
       style: { background: "#fff", borderRadius: 13, padding: 18, marginBottom: 14, border: dragOverBank ? "2px dashed #3B82F6" : "2px dashed #E5E7EB", transition: "border-color .2s" }
     },
     /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "baseline", gap: 10, marginBottom: 14 } }, /* @__PURE__ */ React.createElement("h2", { style: { margin: 0, fontSize: 14, fontWeight: 700, color: "#111827" } }, "Content bank"), /* @__PURE__ */ React.createElement("span", { style: { fontSize: 11, color: "#6B7280", background: "#F3F4F6", borderRadius: 20, padding: "2px 8px", fontWeight: 600 } }, bankTiles.length, " available"), /* @__PURE__ */ React.createElement("span", { style: { fontSize: 11, color: "#9CA3AF", marginLeft: "auto" } }, "Set frequency before dropping \xB7 \u21BB = recurring \xB7 drag to bank to clear all instances")),
+    /* @__PURE__ */ React.createElement("div", { style: { marginBottom: 16 } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 10, marginBottom: 8 } }, /* @__PURE__ */ React.createElement("h3", { style: { margin: 0, fontSize: 12, fontWeight: 700, color: "#111827", textTransform: "uppercase", letterSpacing: "0.05em" } }, "Series"), /* @__PURE__ */ React.createElement("button", { onClick: () => setShowAddSeries(true), style: { background: "#F3F4F6", color: "#374151", border: "1px solid #E5E7EB", borderRadius: 6, padding: "3px 10px", fontSize: 11, fontWeight: 600, cursor: "pointer" } }, "+ Add series")), series.length > 0 && /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 10 } }, series.map((s) => {
+      const memberTiles = s.tileIds.map((id) => tiles.find((t) => t.id === id)).filter((t) => t && !scheduledIds.has(t.id));
+      return /* @__PURE__ */ React.createElement(
+        SeriesCard,
+        {
+          key: s.id,
+          series: s,
+          tiles: memberTiles,
+          dragOverSlot: dragOverSeriesSlot,
+          draggingId,
+          onDragStart: handleDragStart,
+          onDragEnd: handleDragEnd,
+          onDragOverRow: (seriesId, index) => setDragOverSeriesSlot({ seriesId, index }),
+          onDropRow: (seriesId, index) => handleDropOnSeriesSlot(seriesId, index),
+          onDragOverEnd: (seriesId) => setDragOverSeriesSlot({ seriesId, end: true }),
+          onDropEnd: (seriesId) => handleDropOnSeriesSlot(seriesId, null),
+          onRemoveTile: removeTileFromSeries,
+          onEditTile: setEditingTile,
+          onDelete: () => deleteSeries(s.id)
+        }
+      );
+    }))),
     bankTiles.length === 0 ? /* @__PURE__ */ React.createElement("div", { style: { textAlign: "center", padding: "20px 0", color: "#9CA3AF", fontSize: 13 } }, "All content is scheduled") : /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: `repeat(${Math.min(bankByType.length + (untyped.length > 0 ? 1 : 0), 5)},1fr)`, gap: 10, alignItems: "start" } }, bankByType.map(({ type, tiles: gt }) => {
       const tc = TYPE_CONFIG[type];
       return /* @__PURE__ */ React.createElement("div", { key: type }, /* @__PURE__ */ React.createElement("div", { style: { background: tc.color, borderRadius: "7px 7px 0 0", padding: "7px 10px", marginBottom: 5 } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: 11, fontWeight: 700, color: "#fff", lineHeight: 1.3, display: "block" } }, type)), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 4 } }, (() => {
@@ -903,7 +1073,7 @@ function ProgrammingPlanner() {
       },
       /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 4 } }, asyncTiles.map((tile) => /* @__PURE__ */ React.createElement(AsyncTile, { key: tile.id, tile, onEdit: setEditingTile, onRemove: () => removeFromAsync(week.id, tile.id), isDragging: draggingId === tile.id, onDragStart: handleDragStart, onDragEnd: handleDragEnd })), /* @__PURE__ */ React.createElement("div", { style: { minHeight: asyncTiles.length > 0 ? 32 : 52, border: `1.5px dashed ${dragOverAsync === week.id ? "#10B981" : "#A7F3D0"}`, borderRadius: 7, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, color: dragOverAsync === week.id ? "#10B981" : "#A7F3D0", transition: "all .15s" } }, dragOverAsync === week.id ? "+ drop here" : asyncTiles.length === 0 ? "drop async content" : "+ add more"))
     ));
-  }), /* @__PURE__ */ React.createElement("div", { style: { padding: "10px 16px", borderTop: "1px solid #F3F4F6", background: "#FAFAFA", display: "flex", alignItems: "center", gap: 12 } }, /* @__PURE__ */ React.createElement("button", { onClick: () => setShowAddWeek(true), style: { background: "#111827", color: "#fff", border: "none", borderRadius: 8, padding: "7px 16px", fontSize: 12, fontWeight: 600, cursor: "pointer" } }, "+ Add week"), /* @__PURE__ */ React.createElement("span", { style: { fontSize: 11, color: "#9CA3AF" } }, weeks.length, " weeks \xB7 ", totalLive, " live sessions \xB7 ", totalAsync, " async items")))), editingTile && /* @__PURE__ */ React.createElement(EditModal, { tile: editingTile, onSave: saveTile, onDelete: deleteTile, onClose: () => setEditingTile(null) }), showAddWeek && /* @__PURE__ */ React.createElement(AddWeekModal, { onAdd: addWeek, onClose: () => setShowAddWeek(false) }));
+  }), /* @__PURE__ */ React.createElement("div", { style: { padding: "10px 16px", borderTop: "1px solid #F3F4F6", background: "#FAFAFA", display: "flex", alignItems: "center", gap: 12 } }, /* @__PURE__ */ React.createElement("button", { onClick: () => setShowAddWeek(true), style: { background: "#111827", color: "#fff", border: "none", borderRadius: 8, padding: "7px 16px", fontSize: 12, fontWeight: 600, cursor: "pointer" } }, "+ Add week"), /* @__PURE__ */ React.createElement("span", { style: { fontSize: 11, color: "#9CA3AF" } }, weeks.length, " weeks \xB7 ", totalLive, " live sessions \xB7 ", totalAsync, " async items")))), editingTile && /* @__PURE__ */ React.createElement(EditModal, { tile: editingTile, onSave: saveTile, onDelete: deleteTile, onClose: () => setEditingTile(null) }), showAddWeek && /* @__PURE__ */ React.createElement(AddWeekModal, { onAdd: addWeek, onClose: () => setShowAddWeek(false) }), showAddSeries && /* @__PURE__ */ React.createElement(AddSeriesModal, { onAdd: addSeries, onClose: () => setShowAddSeries(false) }));
 }
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(/* @__PURE__ */ React.createElement(ProgrammingPlanner, null));
