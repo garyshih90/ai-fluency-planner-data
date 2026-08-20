@@ -1,17 +1,6 @@
 {
   "tiles": [
     {
-      "id": "t1",
-      "name": "Kickoff + Anatomy of an AI-Led Pursuit",
-      "type": "AI-Led Selling & Origination",
-      "format": "Virtual meeting",
-      "frequency": "once",
-      "ascendCovered": false,
-      "description": "Recap FY26, pivot to FY27 plan, quick hit format spotlight",
-      "owner": "Simon / Customer AI GTM",
-      "notes": ""
-    },
-    {
       "id": "t6",
       "name": "Peer-to-Peer / Open Forum",
       "type": "AI-Led Selling & Origination",
@@ -23,25 +12,14 @@
       "notes": ""
     },
     {
-      "id": "t9",
-      "name": "AI Origination Story",
-      "type": "AI-Led Selling & Origination",
-      "format": "Eminence",
       "frequency": "once",
       "ascendCovered": true,
+      "id": "t9",
+      "name": "AI Deal Origination",
+      "type": "AI-Led Selling & Origination",
+      "format": "Eminence",
       "description": "How top sellers originate AI-led deals before an RFP exists",
       "owner": "TBD",
-      "notes": ""
-    },
-    {
-      "id": "t13",
-      "name": "Seller-to-Seller Enablement",
-      "type": "AI-Led Selling & Origination",
-      "format": "Podcast/Interview",
-      "frequency": "once",
-      "ascendCovered": false,
-      "description": "PMDs share how they used AI to shape or close a recent deal",
-      "owner": "",
       "notes": ""
     },
     {
@@ -50,18 +28,18 @@
       "type": "AI-Led Selling & Origination",
       "format": "Workshop",
       "frequency": "once",
-      "ascendCovered": true,
+      "ascendCovered": false,
       "description": "Real pursuit walkthrough - how AI shaped the approach and close",
       "owner": "Tom McAleer",
       "notes": ""
     },
     {
-      "id": "t14",
-      "name": "Best Practices: AI RFP Response",
-      "type": "AI-Led Selling & Origination",
-      "format": "Eminence",
       "frequency": "once",
       "ascendCovered": true,
+      "id": "t14",
+      "name": "AI RFP Response",
+      "type": "AI-Led Selling & Origination",
+      "format": "Eminence",
       "description": "How to use AI to draft, pressure-test, and iterate RFP responses",
       "owner": "",
       "notes": ""
@@ -78,25 +56,14 @@
       "notes": ""
     },
     {
-      "id": "t16",
-      "name": "Seller-to-Seller Forum",
-      "type": "AI-Led Selling & Origination",
-      "format": "Podcast/Interview",
-      "frequency": "once",
-      "ascendCovered": true,
-      "description": "Peer exchange on what's working in AI-led pursuits",
-      "owner": "",
-      "notes": ""
-    },
-    {
-      "id": "t5",
-      "name": "AI Tools Landscape",
-      "type": "AI Tools & Technical Fluency",
-      "format": "Eminence",
       "frequency": "once",
       "ascendCovered": false,
-      "description": "Quick resource guide on key AI tools across the practice",
-      "owner": "N/A",
+      "id": "t5",
+      "name": "ALTO \"AI Lead to Order\"",
+      "type": "AI Tools & Technical Fluency",
+      "format": "Eminence",
+      "description": "",
+      "owner": "Oliver Siodmak",
       "notes": ""
     },
     {
@@ -298,45 +265,34 @@
       "notes": ""
     },
     {
+      "frequency": "once",
+      "ascendCovered": false,
       "id": "t4",
-      "name": "Client Readiness Assessment",
+      "name": "Kohl's Client Readiness Assessment",
       "type": "Commercial Value Framing",
       "format": "Virtual meeting",
-      "frequency": "once",
-      "ascendCovered": true,
       "description": "Framework for assessing client AI adoption maturity",
       "owner": "TBD",
       "notes": ""
     },
     {
-      "id": "t8",
-      "name": "ROI Framing + Pricing Model Best Practices",
-      "type": "Commercial Value Framing",
-      "format": "Video clip",
       "frequency": "once",
       "ascendCovered": true,
+      "id": "t8",
+      "name": "Pricing Model Best Practices",
+      "type": "Commercial Value Framing",
+      "format": "Video clip",
       "description": "How to quantify AI value and build it into the commercial model",
       "owner": "TBD",
       "notes": ""
     },
     {
-      "id": "t2",
-      "name": "Anatomy of an AI-Led Pursuit",
-      "type": "Client Engagement & Eminence",
-      "format": "Eminence",
-      "frequency": "once",
-      "ascendCovered": false,
-      "description": "Written content and interactive HTML on how AI changes the pursuit",
-      "owner": "",
-      "notes": ""
-    },
-    {
-      "id": "t11",
-      "name": "Executive Narrative",
-      "type": "Client Engagement & Eminence",
-      "format": "Podcast/Interview",
       "frequency": "once",
       "ascendCovered": true,
+      "id": "t11",
+      "name": "Executive Narrative",
+      "type": "AI-Led Selling & Origination",
+      "format": "Podcast/Interview",
       "description": "How to build and deliver an AI value narrative for the C-suite",
       "owner": "",
       "notes": ""
@@ -417,6 +373,17 @@
       "description": "Client spotlight — AI-led pursuit and delivery story",
       "owner": "",
       "notes": ""
+    },
+    {
+      "name": "ROI Framing",
+      "type": "Commercial Value Framing",
+      "format": "Virtual meeting",
+      "frequency": "once",
+      "description": "",
+      "owner": "",
+      "notes": "",
+      "id": "t1787165987789",
+      "ascendCovered": true
     }
   ],
   "daySlots": {},
